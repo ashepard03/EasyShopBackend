@@ -38,6 +38,7 @@ public class CategoriesController
 
     // add the appropriate annotation for a get action
     @GetMapping("")
+    @PreAuthorize("permitAll()")
     public List<Category> getAll()
     {
         // find and return all categories
@@ -46,6 +47,7 @@ public class CategoriesController
 
     // add the appropriate annotation for a get action
     @GetMapping("{id}/categories")
+    @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id)
     {
         // get the category by id
@@ -55,6 +57,7 @@ public class CategoriesController
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
+    @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId)
     {
         // get a list of product by categoryId
@@ -63,7 +66,8 @@ public class CategoriesController
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
-    @PostMapping()
+    @PostMapping
+    @ResponseStatus
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Category addCategory(@RequestBody Category category)
     {
@@ -102,9 +106,8 @@ public class CategoriesController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteCategory(@PathVariable int id)
     {
-        // delete the category by id
-        try
-        {
+
+        try {
             var product = categoryDao.getById(id);
 
             if(product == null)

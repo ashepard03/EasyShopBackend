@@ -51,8 +51,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     public Category getById(int categoryId)
     {
         // get category by id
-        List<Category> categories = new ArrayList<>();
-
+        Category category = null;
         String sql = """
                 SELECT * FROM categories
                 WHERE category_id = ?""";
@@ -66,14 +65,14 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
 
             while (row.next())
             {
-
+                category = mapRow(row);
             }
         }
         catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
-        return null;
+        return category;
     }
 
     @Override
@@ -100,7 +99,8 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
                     int orderId = generatedKeys.getInt(1);
 
                     // get the newly inserted category
-                    return getById(orderId);
+                    //return getById(orderId);
+                    category.setCategoryId(orderId);
                 }
             }
         }
@@ -108,7 +108,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
         {
             throw new RuntimeException(e);
         }
-        return null;
+        return category;
     }
 
     @Override
