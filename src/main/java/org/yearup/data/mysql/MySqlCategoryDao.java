@@ -48,39 +48,31 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public Category getById(int categoryId)
-    {
-        // get category by id
-        Category category = null;
-        String sql = """
-                SELECT * FROM categories
-                WHERE category_id = ?""";
+    public Category getById(int categoryId) {
+        String sql = "SELECT * FROM categories WHERE category_id = ?";
 
-        try (Connection connection = getConnection())
-        {
+        try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, categoryId);
 
             ResultSet row = statement.executeQuery();
 
-            while (row.next())
-            {
-                category = mapRow(row);
+            if (row.next()) {
+                return mapRow(row);
+            } else {
+                return null; // Category not found
             }
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return category;
     }
 
     @Override
-    public Category create(Category category)
-    {
+    public Category create(Category category) {
         // create a new category
-        String sql = "INSERT INTO categories(name, description) " +
-                " VALUES (?, ?);";
+        String sql = """
+                INSERT INTO categories(name, description)
+                VALUES (?, ?);""";
 
         try (Connection connection = getConnection())
         {
@@ -96,11 +88,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
 
                 if (generatedKeys.next()) {
                     // Retrieve the auto-incremented ID
-                    int orderId = generatedKeys.getInt(1);
+                    int categoryId = generatedKeys.getInt(1);
 
                     // get the newly inserted category
                     //return getById(orderId);
-                    category.setCategoryId(orderId);
+                    category.setCategoryId(categoryId);
                 }
             }
         }
@@ -112,8 +104,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public void update(int categoryId, Category category)
-    {
+    public void update(int categoryId, Category category) {
         // update category
         String sql = """
                 UPDATE categories
@@ -137,11 +128,11 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao
     }
 
     @Override
-    public void delete(int categoryId)
-    {
+    public void delete(int categoryId) {
         // delete category
-        String sql = "DELETE FROM categories " +
-                " WHERE category_id = ?;";
+        String sql = """
+                DELETE FROM categories
+                WHERE category_id = ?;""";
 
         try (Connection connection = getConnection())
         {
