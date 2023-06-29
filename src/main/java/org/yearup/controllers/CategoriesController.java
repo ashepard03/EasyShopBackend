@@ -51,7 +51,7 @@ public class CategoriesController
     public ResponseEntity<Category> getById(@PathVariable int id) {
         Category category = categoryDao.getById(id);
         if (category == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Oops... category not found.");
         }
         return ResponseEntity.ok(category);
     }
@@ -80,7 +80,7 @@ public class CategoriesController
         }
         catch(Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... category was not added.");
         }
     }
 
@@ -97,7 +97,7 @@ public class CategoriesController
         }
         catch(Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... category could not be updated.");
         }
     }
 
@@ -119,7 +119,7 @@ public class CategoriesController
         }
         catch(Exception ex)
         {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... category was not deleted.");
         }
     }
 }
