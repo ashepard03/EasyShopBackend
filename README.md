@@ -80,3 +80,5 @@ productDao.create(product);
 // updated method line to UPDATE new product
 productDao.update(id, produt);
 ```
+## Acknowledgements
+I want to thank Javier, Anne, Mohammed, Raquan and Cristi for thier assistance in this final capstone.
