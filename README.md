@@ -20,13 +20,13 @@ From there the user will need to load the EasyShopBackend project and run the ma
 - Main Program Class Name
     - EasyShopApplication
       <br/><br/>
-      ![image](https://github.com/ashepard03/EasyShopBackend/assets/129906864/0630b3e4-1a40-40e2-b4a8-74b03b240d18)
+       ![GetImage.png](..%2F..%2F..%2FUsers%2FStudent%2FDownloads%2FGetImage.png)
 
 Once the main program is running, the user will need to load the web application files where they will find the main file required to open the API in an online web browser.
 - Main File Name
     - index.html
       <br/><br/>
-      ![image](https://github.com/ashepard03/EasyShopBackend/assets/129906864/b94f72e7-6634-44ff-8f5c-10d2b145bf44)
+      ![GetImage (1).png](..%2F..%2F..%2FUsers%2FStudent%2FDownloads%2FGetImage%20%281%29.png)
 
 ## Aplication Code Implemetations
 ### Categories Controller
